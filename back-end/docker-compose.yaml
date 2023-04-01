@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  mongodb:
+    image: "mongo"
+    volumes:
+    - data:/data/db
+  backend:
+    build: ./
+    ports:
+      -"4000:4000"
+    volumes:
+      - log:/app/logs
+      - ./:/server
+      - /app/node_modules
+    depends_on:
+      - mongodb
